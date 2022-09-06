@@ -22,4 +22,7 @@ PS1='[\u@\h \W]\$ '
 # dotfiles management using git alias
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+# for gpg signing git commits
+export GPG_TTY=$(tty)
+
 alias nv="nvim"

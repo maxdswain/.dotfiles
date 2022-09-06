@@ -1,0 +1,8 @@
+[init]
+	defaultBranch = main
+[user]
+	name = Max Swain
+	email = 89113255+maxdswain@users.noreply.github.com
+	signingkey = 00246437E7F4E3EA9F8B6FA310C62C7B58918430
+[commit]
+	gpgsign = true
