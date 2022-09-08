@@ -10,6 +10,9 @@ alias sudo='sudo '
 alias nv="nvim"
 alias ls='ls --color=auto'
 
+# custom bash prompt
+source liquidprompt
+
 # Use bash-completion, if available
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
@@ -23,8 +26,6 @@ if [ -f "$LFCD" ]; then
     source "$LFCD"
 fi
 bind '"\C-o":"lfcd\C-m"'
-
-PS1='[\u@\h \W]\$ '
 
 [ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env" # ghcup-env
 
