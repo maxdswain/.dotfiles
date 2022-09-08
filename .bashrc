@@ -2,6 +2,14 @@
 # ~/.bashrc
 #
 
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Aliases
+alias sudo='sudo '
+alias nv="nvim"
+alias ls='ls --color=auto'
+
 # Use bash-completion, if available
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
@@ -16,15 +24,14 @@ if [ -f "$LFCD" ]; then
 fi
 bind '"\C-o":"lfcd\C-m"'
 
-alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
+
+[ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env" # ghcup-env
+
+[ -e "/home/max/.bashrc.casino" ] && source "/home/max/.bashrc.casino"
 
 # dotfiles management using git alias
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-# for gpg signing git commits
-export GPG_TTY=$(tty)
-
-# handy alias'
-alias sudo='sudo '
-alias nv="nvim"
+export EDTIOR="nvim"
+export GPG_TTY=$(tty) # for gpg signing git commmits
