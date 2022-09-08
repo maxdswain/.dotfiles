@@ -25,4 +25,6 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # for gpg signing git commits
 export GPG_TTY=$(tty)
 
+# handy alias'
+alias sudo='sudo '
 alias nv="nvim"
