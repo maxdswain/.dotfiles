@@ -1,0 +1,26 @@
+{
+    "python.pythonPath": "C:\\Users\\maxds\\anaconda3\\python.exe",
+    "workbench.editor.untitled.hint": "hidden",
+    "redhat.telemetry.enabled": false,
+    "python.defaultInterpreterPath": "/bin/python",
+    "git.enableCommitSigning": true,
+    "editor.minimap.enabled": false,
+    "r.rterm.windows": "C:\\ProgramData\\Anaconda3\\Scripts\\radian.exe",
+    "r.bracketedPaste": true,
+    "r.plot.useHttpgd": true,
+    "workbench.editorAssociations": {
+        "*.pdf": "latex-workshop-pdf-hook"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "haskell.manageHLS": "GHCup",
+    "cSpell.userWords": [
+        "dataclass",
+        "seaborn"
+    ],
+    "terminal.integrated.shellIntegration.enabled": true,
+    "git.mergeEditor": true,
+    "editor.fontFamily": "'Fira Code'",
+    "editor.fontLigatures": true
+}
