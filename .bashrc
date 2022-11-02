@@ -11,7 +11,11 @@ alias nv="nvim"
 alias ls='ls --color=auto'
 
 # custom bash prompt
-source liquidprompt
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. /usr/share/powerline/bindings/bash/powerline.sh
+#source liquidprompt
 
 # Use bash-completion, if available
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
