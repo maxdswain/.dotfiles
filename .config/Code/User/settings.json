@@ -8,12 +8,10 @@
     "r.rterm.windows": "C:\\ProgramData\\Anaconda3\\Scripts\\radian.exe",
     "r.bracketedPaste": true,
     "r.plot.useHttpgd": true,
-    "workbench.editorAssociations": {
-        "*.pdf": "latex-workshop-pdf-hook"
-    },
     "[python]": {
-        "editor.defaultFormatter": "ms-python.python"
+        "editor.defaultFormatter": "ms-python.black-formatter"
     },
+    "black-formatter.args": ["--line-length", "120"],
     "haskell.manageHLS": "GHCup",
     "cSpell.userWords": [
         "dataclass",
@@ -24,5 +22,7 @@
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
     "python.analysis.inlayHints.variableTypes": true,
-    "python.analysis.inlayHints.functionReturnTypes": true
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120, IncludeBlocks: Preserve}",
+    "editor.formatOnSave": true
 }
