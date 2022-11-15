@@ -5,23 +5,21 @@
     "python.defaultInterpreterPath": "/bin/python",
     "git.enableCommitSigning": true,
     "editor.minimap.enabled": false,
-    "r.rterm.windows": "C:\\ProgramData\\Anaconda3\\Scripts\\radian.exe",
-    "r.bracketedPaste": true,
-    "r.plot.useHttpgd": true,
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    "black-formatter.args": ["--line-length", "120"],
+    "black-formatter.args": [
+        "--line-length",
+        "120"
+    ],
     "haskell.manageHLS": "GHCup",
     "cSpell.userWords": [
         "dataclass",
         "seaborn"
     ],
-    "terminal.integrated.shellIntegration.enabled": true,
     "git.mergeEditor": true,
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
-    "python.analysis.inlayHints.variableTypes": true,
     "python.analysis.inlayHints.functionReturnTypes": true,
     "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120, IncludeBlocks: Preserve}",
     "editor.formatOnSave": true
