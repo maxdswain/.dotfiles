@@ -14,7 +14,8 @@
         "--line-length",
         "120"
     ],
-    "[C]": {
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
         "editor.formatOnSave": true
     },
     "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120, IncludeBlocks: Preserve}",
@@ -25,5 +26,5 @@
     ],
     "editor.minimap.enabled": false,
     "editor.fontFamily": "'Fira Code'",
-    "editor.fontLigatures": true,
+    "editor.fontLigatures": true
 }
