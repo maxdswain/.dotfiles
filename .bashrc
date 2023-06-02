@@ -6,20 +6,14 @@
 [[ $- != *i* ]] && return
 
 # Aliases
-alias sudo='sudo '
+alias sudo="sudo "
 alias nv="nvim"
-alias ls='ls --color=auto'
+alias ls="ls --color=auto"
+alias shutdown="shutdown --no-wall"
+alias reboot="reboot --no-wall"
 
 # custom bash prompt
 source liquidprompt
-
-# Use bash-completion, if available
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-    . /usr/share/bash-completion/bash_completion
-bind 'TAB:menu-complete'
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
 
 # change to cd using lf ctrl+o script
 LFCD="/home/max/.config/lf/lfcd.sh"
@@ -28,17 +22,12 @@ if [ -f "$LFCD" ]; then
 fi
 bind '"\C-o":"lfcd\C-m"'
 
-[ -f "/home/max/.ghcup/env" ] && source "/home/max/.ghcup/env" # ghcup-env
-
-[ -e "/home/max/.bashrc.casino" ] && source "/home/max/.bashrc.casino"
+bind 'TAB:menu-complete'
 
 # dotfiles management using git alias
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-export EDTIOR="nvim"
+export EDITOR="nvim"
 export GPG_TTY=$(tty) # for gpg signing git commmits
+export PATH=$PATH:$HOME/OneDrive/Documents/Programming/Shell-Scripts
 
-# organise dotfiles
-export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
-export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
-export KDEHOME="$XDG_CONFIG_HOME"/kde
