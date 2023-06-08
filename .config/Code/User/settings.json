@@ -25,6 +25,6 @@
         "seaborn"
     ],
     "editor.minimap.enabled": false,
-    "editor.fontFamily": "'Fira Code'",
+    "editor.fontFamily": "'FiraCode Nerd Font'",
     "editor.fontLigatures": true
 }
