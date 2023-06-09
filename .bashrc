@@ -8,6 +8,8 @@
 # Aliases
 alias sudo="sudo "
 alias nv="nvim"
+alias diff="diff --color=auto"
+alias grep="grep --color=auto"
 alias ls="ls --color=auto"
 alias shutdown="shutdown --no-wall"
 alias reboot="reboot --no-wall"
@@ -18,8 +20,8 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # custom bash prompt
 source liquidprompt
 
-# change to cd using lf ctrl+o script
-LFCD="/home/max/.config/lf/lfcd.sh"
+# cd using ctrl+o with lf script
+LFCD="$XDG_CONFIG_HOME/lf/lfcd.sh"
 if [ -f "$LFCD" ]; then
     source "$LFCD"
 fi
