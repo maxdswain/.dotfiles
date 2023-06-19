@@ -13,6 +13,7 @@ alias grep="grep --color=auto"
 alias ls="ls --color=auto"
 alias shutdown="shutdown --no-wall"
 alias reboot="reboot --no-wall"
+alias code="code --ozone-platform-hint=auto" # for wayland
 
 # dotfiles management using git alias
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
