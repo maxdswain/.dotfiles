@@ -4,10 +4,6 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    export MOZ_ENABLE_WAYLAND=1
-fi
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export MOZ_ENABLE_WAYLAND=1
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-[[ $(fgconsole 2>/dev/null) == 1 ]] && exec startx -- vt1 &> /dev/null
-fi
+[[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]] && [[ $(fgconsole 2>/dev/null) == 1 ]] && exec startx -- vt1 &> /dev/null

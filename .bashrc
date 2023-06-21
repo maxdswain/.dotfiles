@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+[ "$XDG_SESSION_TYPE" = "wayland" ] && cb_copy="wl-copy" || cb_copy="xclip -sel c"
+
 # Aliases
 alias sudo="sudo "
 alias nv="nvim"
@@ -14,6 +16,23 @@ alias ls="ls --color=auto"
 alias shutdown="shutdown --no-wall"
 alias reboot="reboot --no-wall"
 alias code="code --ozone-platform-hint=auto" # for wayland
+alias gpath="fd -t f | fzf | tr -d '\n' | $cb_copy"
+alias hst="history | cut -c 8- | sort | uniq | fzf | tr -d '\n' | $cb_copy"
+alias pi="paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S"
+alias pr="paru -Qq | fzf --multi --preview 'paru -Qi {1}' | xargs -ro sudo paru -Rns"
+
+fcd() {
+	cd "$(fd -t d | fzf)"
+}
+hist() {
+	local selected="$(history | cut -c 8- | sort | uniq | fzf | tr -d '\n')"
+	READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
+	READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
+}
+bind -x '"\C-h":hist'
+open() {
+	xdg-open "$(fd -t f | fzf)"
+}
 
 # dotfiles management using git alias
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -31,13 +50,12 @@ export XDG_STATE_HOME=$HOME/.local/state
 
 export HISTFILE="$XDG_STATE_HOME"/bash/history
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 
 # cd using ctrl+o with lf script
 LFCD="$XDG_CONFIG_HOME/lf/lfcd.sh"
-if [ -f "$LFCD" ]; then
-    source "$LFCD"
-fi
+[ -f "$LFCD" ] && source "$LFCD"
 bind '"\C-o":"lfcd\C-m"'
 bind 'TAB:menu-complete'
 
