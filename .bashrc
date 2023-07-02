@@ -40,7 +40,6 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 export EDITOR="nvim"
 export GPG_TTY=$(tty) # for gpg signing git commmits
 export PATH=$PATH:$HOME/OneDrive/Documents/Programming/Shell-Scripts
-export CM_LAUNCHER=rofi
 
 # organising dotfiles
 export XDG_CONFIG_HOME=$HOME/.config
