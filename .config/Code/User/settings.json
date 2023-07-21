@@ -1,7 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\maxds\\anaconda3\\python.exe",
     "workbench.editor.untitled.hint": "hidden",
-    "redhat.telemetry.enabled": false,
     "git.enableCommitSigning": true,
     "git.mergeEditor": true,
     "python.defaultInterpreterPath": "/bin/python",
@@ -19,12 +17,12 @@
         "editor.formatOnSave": true
     },
     "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120, IncludeBlocks: Preserve}",
-    "haskell.manageHLS": "GHCup",
     "cSpell.userWords": [
         "dataclass",
         "seaborn"
     ],
-    "editor.minimap.enabled": false,
     "editor.fontFamily": "'FiraCode Nerd Font'",
-    "editor.fontLigatures": true
+    "editor.fontLigatures": true,
+    "keyboard.dispatch": "keyCode",
+    "editor.minimap.enabled": false
 }
