@@ -1,7 +1,7 @@
 #!/bin/sh
 
 network_print() {
-    connection_list=$(nmcli -t -f name,type,device,state connection show --order name --active 2>/dev/null | grep -v ':bridge:')
+    connection_list=$(nmcli -t -f name,type,device,state connection show --order name --active 2>/dev/null | grep -v ':bridge:\|:lo:')
     counter=0
 
     if [ -n "$connection_list" ] && [ "$(echo "$connection_list" | wc -l)" -gt 0  ]; then
@@ -46,13 +46,13 @@ network_print() {
                 icon="#5"
             fi
 
-            if [ $counter -gt 0 ] && [ "$description" != "lo" ]; then
+            if [ $counter -gt 0 ]; then
                 printf "  %s %s" "$icon" "$description"
-            elif [ "$description" != "lo" ]; then
+            else
                 printf "%s %s" "$icon" "$description"
             fi
 
-            [ "$description" != "lo" ] && counter=$((counter + 1))
+            counter=$((counter + 1))
         done
 
         printf "\n"
