@@ -34,10 +34,10 @@ network_print() {
                     fi
 
                     description="Ethernet ($speed)"
-				elif [ "$type" = "wireguard" ]; then
-					description="VPN"
-					icon="󰒘"
-				elif [ "$type" = "bluetooth" ]; then
+                elif [ "$type" = "wireguard" ]; then
+                    description="VPN"
+                    icon="󰒘"
+                elif [ "$type" = "bluetooth" ]; then
                     icon="#3"
                 fi
             elif [ "$state" = "activating" ]; then
@@ -46,15 +46,13 @@ network_print() {
                 icon="#5"
             fi
 
-            if [ $counter -gt 1 ] && [ "$description" != "lo" ]; then
+            if [ $counter -gt 0 ] && [ "$description" != "lo" ]; then
                 printf "  %s %s" "$icon" "$description"
-            else
-                if [ "$description" != "lo" ]; then
-                    printf "%s %s" "$icon" "$description"
-                fi
+            elif [ "$description" != "lo" ]; then
+                printf "%s %s" "$icon" "$description"
             fi
 
-            counter=$((counter + 1))
+            [ "$description" != "lo" ] && counter=$((counter + 1))
         done
 
         printf "\n"
