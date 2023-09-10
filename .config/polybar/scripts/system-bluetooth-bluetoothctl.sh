@@ -27,7 +27,7 @@ bluetooth_print() {
                         else
                             battery_icon=
                         fi
-                        device_alias="${device_alias} $battery_icon   $device_battery%"
+                        device_alias="$device_alias $battery_icon  $device_battery%"
                     fi
                     if [ $counter -gt 0 ]; then
                         printf ", %s" "$device_alias"
