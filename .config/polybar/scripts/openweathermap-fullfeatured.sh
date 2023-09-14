@@ -37,7 +37,7 @@ get_duration() {
 }
 
 KEY="${OPENWEATHER_API_KEY:-}"
-CITY="7292447"
+CITY="2650225"
 UNITS="metric"
 SYMBOL="°"
 
