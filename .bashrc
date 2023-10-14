@@ -18,6 +18,7 @@ alias hst="history | cut -c 8- | sort | uniq | fzf | tr -d '\n' | $cb_copy"
 alias pi="paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S"
 alias pr="paru -Qq | fzf --multi --preview 'paru -Qi {1}' | xargs -ro sudo paru -Rns"
 
+gc() { git commit -m "$*" ; }
 fcd() { cd "$(find -type d | fzf)" ; }
 hist() {
 	local selected="$(history | cut -c 8- | sort | uniq | fzf | tr -d '\n')"
