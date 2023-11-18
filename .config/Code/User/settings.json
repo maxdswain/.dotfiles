@@ -1,20 +1,19 @@
 {
-    "workbench.editor.untitled.hint": "hidden",
     "git.enableCommitSigning": true,
     "git.mergeEditor": true,
     "python.defaultInterpreterPath": "/bin/python",
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": true,
+            "source.organizeImports": true
+        }
     },
     "python.analysis.inlayHints.functionReturnTypes": true,
-    "black-formatter.args": [
-        "--line-length",
-        "120"
-    ],
     "[c]": {
         "editor.defaultFormatter": "ms-vscode.cpptools",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
     },
     "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120, IncludeBlocks: Preserve}",
     "cSpell.userWords": [
@@ -24,5 +23,9 @@
     "editor.fontFamily": "'FiraCode Nerd Font'",
     "editor.fontLigatures": true,
     "keyboard.dispatch": "keyCode",
-    "editor.minimap.enabled": false
+    "editor.minimap.enabled": false,
+    "workbench.editor.empty.hint": "hidden",
+    "vim.handleKeys": {
+        "<C-p>": false
+    }
 }
