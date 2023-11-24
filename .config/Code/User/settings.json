@@ -13,7 +13,7 @@
     "python.analysis.inlayHints.functionReturnTypes": true,
     "[c]": {
         "editor.defaultFormatter": "ms-vscode.cpptools",
-        "editor.formatOnSave": true,
+        "editor.formatOnSave": true
     },
     "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120, IncludeBlocks: Preserve}",
     "cSpell.userWords": [
@@ -27,5 +27,6 @@
     "workbench.editor.empty.hint": "hidden",
     "vim.handleKeys": {
         "<C-p>": false
-    }
+    },
+    "python.analysis.typeCheckingMode": "strict"
 }
