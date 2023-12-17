@@ -8,7 +8,7 @@
 # sync_dir = "~/OneDrive"
 # skip_file = "~*|.~*|*.tmp"
 monitor_interval = "30"
-# skip_dir = ""
+skip_dir = "*.venv"
 # log_dir = "/var/log/onedrive/"
 # drive_id = ""
 # upload_only = "false"
