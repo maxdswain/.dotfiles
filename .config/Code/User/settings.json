@@ -6,8 +6,8 @@
         "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-            "source.fixAll": true,
-            "source.organizeImports": true
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
         }
     },
     "python.analysis.inlayHints.functionReturnTypes": true,
@@ -25,6 +25,7 @@
     "keyboard.dispatch": "keyCode",
     "editor.minimap.enabled": false,
     "workbench.editor.empty.hint": "hidden",
+    "vim.useSystemClipboard": true,
     "vim.handleKeys": {
         "<C-p>": false
     },
