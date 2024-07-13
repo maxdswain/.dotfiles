@@ -28,6 +28,5 @@
     "vim.useSystemClipboard": true,
     "vim.handleKeys": {
         "<C-p>": false
-    },
-    "python.analysis.typeCheckingMode": "strict"
+    }
 }
