@@ -28,5 +28,7 @@
     "vim.useSystemClipboard": true,
     "vim.handleKeys": {
         "<C-p>": false
-    }
+    },
+    "editor.wordWrap": "on",
+    "terminal.integrated.stickyScroll.enabled": false,
 }
