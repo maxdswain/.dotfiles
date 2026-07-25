@@ -6,3 +6,5 @@
 	signingkey = 00246437E7F4E3EA9F8B6FA310C62C7B58918430
 [commit]
 	gpgsign = true
+[push]
+	autoSetupRemote = true

@@ -4,5 +4,11 @@ indent-width = 4
 extend-include = ["*.ipynb"]
 
 [tool.ruff.lint]
-select = ["F", "E", "W", "C90", "I", "N", "D", "UP", "YTT", "ANN", "ASYNC", "TRIO", "S", "BLE", "FBT", "B", "C4", "DTZ", "T10", "EXE", "ISC", "ICN", "G", "PIE", "PYI", "RSE", "RET", "SLF", "SLOT", "SIM", "TID", "TCH", "INT", "ARG", "PTH", "PD", "PGH", "PL", "TRY", "FLY", "NPY", "AIR", "PERF", "FURB", "LOG", "RUF"]
-ignore = []
+select = ["ALL"]
+ignore = ["COM812"]
+
+[tool.ruff.format]
+preview = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"

@@ -25,6 +25,7 @@ hist() {
 	READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
 	READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
 }
+gbr () { git for-each-ref refs/heads refs/remotes --format='%(refname:short)' | sed 's#origin/##' | sort -u | fzf --height=20% --reverse --info=inline | xargs -r git switch ; }
 open() { xdg-open "$(find -type f | fzf)" ; }
 
 # dotfiles management using git alias
@@ -32,7 +33,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 export EDITOR="nvim"
 export GPG_TTY=$(tty) # for gpg signing git commmits
-export PATH=$PATH:$HOME/OneDrive/Documents/Programming/Shell-Scripts
+export PATH="$(go env GOPATH)/bin":$PATH:$HOME/OneDrive/Documents/Programming/Shell-Scripts
 
 # organising dotfiles
 export XDG_CONFIG_HOME=$HOME/.config
@@ -44,6 +45,9 @@ export HISTFILE="$XDG_STATE_HOME"/bash/history
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME/pi/agent"
+export NPM_CONFIG_PREFIX="$XDG_DATA_HOME/npm"
+export PATH="$NPM_CONFIG_PREFIX/bin:$PATH" # for globally installed npm packages
 
 # bash history
 export HISTCONTROL=erasedups
@@ -53,9 +57,14 @@ export HISTFILESIZE=
 # cd using ctrl+o with lf script
 LFCD="$XDG_CONFIG_HOME/lf/lfcd.sh"
 [ -f "$LFCD" ] && source "$LFCD"
-bind '"\C-o":"lfcd\C-m"'
-bind -x '"\C-h":hist'
-bind 'TAB:menu-complete'
+
+if [ -t 1 ]; then
+	bind '"\C-o":"lfcd\C-m"'
+	bind -x '"\C-h":hist'
+	bind -x '"\C-b":gbr'
+	bind -x '"\C-t":tmux'
+	bind 'TAB:menu-complete'
+fi
 
 # custom bash prompt
 eval "$(starship init bash)"

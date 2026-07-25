@@ -40,4 +40,12 @@
         "key": "ctrl+9",
         "command": "workbench.action.openEditorAtIndex9"
     },
+    {
+        "key": "ctrl+j",
+        "command": ""
+    },
+    {
+        "key": "ctrl+k",
+        "command": ""
+    },
 ]

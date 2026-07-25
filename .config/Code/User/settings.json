@@ -31,4 +31,8 @@
     },
     "editor.wordWrap": "on",
     "terminal.integrated.stickyScroll.enabled": false,
+    "terminal.integrated.initialHint": false,
+    "python.languageServer": "None",
+    "go.toolsManagement.autoUpdate": true,
+    "extensions.ignoreRecommendations": true,
 }
