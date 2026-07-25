@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Required for xdg-desktop-portal-gtk to work
+systemctl --user import-environment DISPLAY XAUTHORITY XDG_SESSION_TYPE
+
 # For screenlocking with xssstate
 xsidle.sh slock &
 
