@@ -15,7 +15,7 @@ alias shutdown="shutdown --no-wall"
 alias reboot="reboot --no-wall"
 alias gpath="find -type f | fzf | tr -d '\n' | $cb_copy"
 alias hst="history | cut -c 8- | sort | uniq | fzf | tr -d '\n' | $cb_copy"
-alias pi="paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S"
+alias pn="paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S"
 alias pr="paru -Qq | fzf --multi --preview 'paru -Qi {1}' | xargs -ro sudo paru -Rns"
 
 gc() { git commit -m "$*" ; }
@@ -63,6 +63,7 @@ if [ -t 1 ]; then
 	bind -x '"\C-h":hist'
 	bind -x '"\C-b":gbr'
 	bind -x '"\C-t":tmux'
+	bind -x '"\C-k":pi'
 	bind 'TAB:menu-complete'
 fi
 
