@@ -68,3 +68,13 @@ fi
 
 # custom bash prompt
 eval "$(starship init bash)"
+
+__first_prompt_fix() {
+  local ec=$?
+  if [ -z "${__prompt_shown-}" ]; then
+    __prompt_shown=1
+    ec=0
+  fi
+  return $ec
+}
+PROMPT_COMMAND="__first_prompt_fix; $PROMPT_COMMAND"
