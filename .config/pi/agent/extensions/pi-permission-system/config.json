@@ -11,7 +11,11 @@
       "*": "ask",
       "rm -rf *": "deny",
       "sudo *": "ask",
-      "curl *": "deny"
+      "curl *": "deny",
+      "npm run build": "allow",
+      "poe types": "allow",
+      "poe lint": "allow",
+      "poe test": "allow"
     },
     "external_directory": "ask"
   }

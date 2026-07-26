@@ -33,7 +33,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 export EDITOR="nvim"
 export GPG_TTY=$(tty) # for gpg signing git commmits
-export PATH="$(go env GOPATH)/bin":$PATH:$HOME/OneDrive/Documents/Programming/Shell-Scripts
+export PATH="$(go env GOPATH)/bin":$PATH:$HOME/.local/bin:$HOME/OneDrive/Documents/Programming/Shell-Scripts
 
 # organising dotfiles
 export XDG_CONFIG_HOME=$HOME/.config

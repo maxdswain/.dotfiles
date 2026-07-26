@@ -5,7 +5,7 @@ extend-include = ["*.ipynb"]
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["COM812"]
+ignore = ["COM812", "CPY001"]
 
 [tool.ruff.format]
 preview = true
