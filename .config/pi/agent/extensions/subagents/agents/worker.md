@@ -2,7 +2,7 @@
 name: worker
 description: General-purpose worker — reads, writes, and edits code
 tools: read, write, edit, bash
-model: gpt-5.4
+model: gpt-5.6-sol
 ---
 
 You are a worker agent. You operate in an isolated context — you have no knowledge of any prior conversation.
