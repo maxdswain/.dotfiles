@@ -10,11 +10,12 @@
     "bash": {
       "*": "ask",
       "rm -rf *": "deny",
-      "sudo *": "ask",
+      "sudo *": "deny",
       "curl *": "deny",
       "npm run build": "allow",
       "poe types": "allow",
       "poe lint": "allow",
+      "poe format *": "allow",
       "poe test": "allow"
     },
     "external_directory": "ask"

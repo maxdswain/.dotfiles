@@ -4,8 +4,8 @@ A pi extension that registers a single `subagent` tool with three agents:
 
 | Agent | Tools | Model | Purpose |
 |-------|-------|-------|---------|
-| **scout** | read, grep, find, ls | gpt-5.3-codex-spark | Fast codebase recon |
-| **researcher** | codex_search, web_fetch | gpt-5.3-codex-spark | Web research |
+| **scout** | read, grep, find, ls | gpt-5.6-luna | Fast codebase recon |
+| **researcher** | codex_search, web_fetch | gpt-5.6-luna | Web research |
 | **worker** | read, write, edit, bash | gpt-5.6-sol | Code changes |
 
 ## Usage
