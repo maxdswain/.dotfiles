@@ -33,7 +33,6 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 export EDITOR="nvim"
 export GPG_TTY=$(tty) # for gpg signing git commmits
-export PATH="$(go env GOPATH)/bin":$PATH:$HOME/.local/bin:$HOME/OneDrive/Documents/Programming/Shell-Scripts
 
 # organising dotfiles
 export XDG_CONFIG_HOME=$HOME/.config
@@ -42,12 +41,15 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 
 export HISTFILE="$XDG_STATE_HOME"/bash/history
+export PYTHON_HISTORY=$XDG_STATE_HOME/python_history
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME/pi/agent"
-export NPM_CONFIG_PREFIX="$XDG_DATA_HOME/npm"
-export PATH="$NPM_CONFIG_PREFIX/bin:$PATH" # for globally installed npm packages
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export GOPATH="$XDG_DATA_HOME"/go
+export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
+export PATH="$GOPATH/bin:$NPM_CONFIG_PREFIX/bin:$PATH:$HOME/.local/bin:$HOME/OneDrive/Documents/Programming/Shell-Scripts"
 
 # bash history
 export HISTCONTROL=erasedups
