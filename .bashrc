@@ -49,7 +49,7 @@ export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME/pi/agent"
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export GOPATH="$XDG_DATA_HOME"/go
 export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
-export PATH="$GOPATH/bin:$NPM_CONFIG_PREFIX/bin:$PATH:$HOME/.local/bin"
+export PATH="$GOPATH/bin:$XDG_DATA_HOME/npm/bin:$PATH:$HOME/.local/bin"
 
 # bash history
 export HISTCONTROL=erasedups
