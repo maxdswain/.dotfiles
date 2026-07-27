@@ -36,8 +36,16 @@ get_duration() {
 
 }
 
+weather_config="${XDG_CONFIG_HOME:-$HOME/.config}/polybar/weather.local"
+
+if [ -r "$weather_config" ]; then
+    . "$weather_config"
+fi
+
+: "${OPENWEATHER_API_KEY:?Set OPENWEATHER_API_KEY in $weather_config}"
+
 KEY="${OPENWEATHER_API_KEY:-}"
-CITY="2650225"
+CITY="${OPENWEATHER_CITY:-2650225}"
 UNITS="metric"
 SYMBOL="°"
 
