@@ -8,7 +8,7 @@
  *   /read-only status -> show current state
  *
  * Notes:
- * - Hard-enforces a tiny tool allowlist: read, grep, find, ls
+ * - Hard-enforces a read-only tool allowlist: local reads plus user questions and web search/fetch
  * - Blocks every other tool call while enabled
  * - Re-registers the allowed tools with the built-in read-only implementations
  * - State is in-memory only and resets when pi restarts/reloads
@@ -19,7 +19,15 @@ import { createFindTool, createGrepTool, createLsTool, createReadTool } from "@m
 const COMMAND_NAME = "read-only";
 const STATUS_KEY = "read-only-mode";
 const WIDGET_KEY = "read-only-mode";
-const READ_ONLY_TOOL_NAMES = ["read", "grep", "find", "ls"] as const;
+const READ_ONLY_TOOL_NAMES = [
+	"read",
+	"grep",
+	"find",
+	"ls",
+	"ask_user_question",
+	"codex_search",
+	"web_fetch",
+] as const;
 
 function getReadOnlyToolNames(pi: ExtensionAPI): string[] {
 	const allToolNames = new Set(pi.getAllTools().map((tool) => tool.name));
@@ -182,7 +190,7 @@ export default function readOnlyModeExtension(pi: ExtensionAPI) {
 				event.systemPrompt +
 				`\n\n[Read-only mode is active]\n` +
 				`- You may only use these tools: ${tools}.\n` +
-				`- You must not attempt any action that changes local files, processes, git state, dependencies, databases, remote systems, or any other external state.\n` +
+				`- You must not attempt any action that changes local files, processes, git state, dependencies, databases, remote systems, or any other external state. Read-only searches and fetches are allowed.\n` +
 				`- If the user asks for any write or side-effecting action, explain that read-only mode is enabled and tell them to run /${COMMAND_NAME} off first.`,
 		};
 	});
