@@ -11,6 +11,7 @@ import * as path from "node:path";
 import type { ExtensionAPI, ExtensionContext } from "@mariozechner/pi-coding-agent";
 import { getMarkdownTheme, parseFrontmatter, truncateHead, withFileMutationQueue, DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES } from "@mariozechner/pi-coding-agent";
 import { Container, Markdown, Spacer, Text, visibleWidth } from "@mariozechner/pi-tui";
+import { StringEnum } from "@earendil-works/pi-ai";
 import { Type } from "typebox";
 
 // ── Types ──────────────────────────────────────────────────────────────
@@ -83,7 +84,8 @@ function loadConfig(): ExtensionConfig {
 const BUILTIN_TOOLS = new Set(["read", "write", "edit", "bash", "grep", "find", "ls"]);
 
 // Custom tools that require loading an extension into the subagent process
-const EXT_BASE = path.join(process.env.HOME || "~", ".pi", "agent", "extensions");
+const AGENT_DIR = process.env.PI_CODING_AGENT_DIR || path.join(process.env.HOME || "~", ".pi", "agent");
+const EXT_BASE = path.join(AGENT_DIR, "extensions");
 const CUSTOM_TOOL_EXTENSIONS: Record<string, string> = {
 	web_search: path.join(EXT_BASE, "web-search", "index.ts"),
 	codex_search: path.join(EXT_BASE, "..", "npm", "node_modules", "pi-codex-search", "index.ts"),
@@ -253,13 +255,12 @@ async function buildPiArgs(
 		}
 	}
 
-	// Use --no-extensions then add only what we need
+	// Use --no-extensions then add only the extensions and tools this agent needs.
+	// `--no-tools` also suppresses extension tools, so allowlist every declared tool.
 	args.push("--no-extensions");
-
-	if (builtinTools.length > 0) {
-		args.push("--tools", builtinTools.join(","));
+	if (agent.tools.length > 0) {
+		args.push("--tools", agent.tools.join(","));
 	} else {
-		// No builtin tools needed — disable defaults so only extension tools are available
 		args.push("--no-tools");
 	}
 
@@ -648,12 +649,16 @@ export default function (pi: ExtensionAPI) {
 	const config = loadConfig();
 	const maxConcurrency = config.maxConcurrency ?? DEFAULT_MAX_CONCURRENCY;
 	agents = loadAgents();
+	const agentNames = agents.map((agent) => agent.name);
+	const agentNameSchema = StringEnum(agentNames, {
+		description: `Registered agent name (${agentNames.join(", ") || "none"})`,
+	});
 
 	pi.registerTool({
 		name: "subagent",
 		label: "Subagent",
 		description:
-			"Run a subagent to complete a task. Subagents have NO context from the current conversation — include all necessary context in the task description.",
+			`Run a registered subagent (${agentNames.join(", ") || "none"}) to complete a task. Subagents have NO context from the current conversation — include all necessary context in the task description.`,
 		promptSnippet: "Run subagents for delegated tasks",
 		promptGuidelines: [
 			"Parallel tool calls are your primary parallelism mechanism — put multiple independent read/fetch/search calls in one function_calls block. Don't use subagents to parallelize simple I/O.",
@@ -662,14 +667,12 @@ export default function (pi: ExtensionAPI) {
 			"Subagents have NO context from the current conversation — include ALL necessary context in the task description",
 		],
 		parameters: Type.Object({
-			agent: Type.Optional(
-				Type.String({ description: "Name of the agent to invoke (SINGLE mode)" }),
-			),
+			agent: Type.Optional(agentNameSchema),
 			task: Type.Optional(Type.String({ description: "Task description (SINGLE mode)" })),
 			tasks: Type.Optional(
 				Type.Array(
 					Type.Object({
-						agent: Type.String({ description: "Name of the agent to invoke" }),
+						agent: agentNameSchema,
 						task: Type.String({ description: "Task description" }),
 						cwd: Type.Optional(Type.String({ description: "Working directory for the agent process" })),
 					}),
