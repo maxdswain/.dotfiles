@@ -35,4 +35,7 @@
     "python.languageServer": "None",
     "go.toolsManagement.autoUpdate": true,
     "extensions.ignoreRecommendations": true,
+    "editor.rulers": [
+        120
+    ],
 }
