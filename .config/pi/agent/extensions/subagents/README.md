@@ -4,9 +4,9 @@ A pi extension that registers a single `subagent` tool with three agents:
 
 | Agent | Tools | Model | Purpose |
 |-------|-------|-------|---------|
-| **scout** | read, grep, find, ls | gpt-5.6-luna | Fast codebase recon |
-| **researcher** | codex_search, web_fetch | gpt-5.6-luna | Web research |
-| **worker** | read, write, edit, bash | gpt-5.6-sol | Code changes |
+| **scout** | read, grep, find, ls | gpt-6-luna | Fast codebase recon |
+| **researcher** | codex_search, web_fetch | gpt-6-luna | Web research |
+| **worker** | read, write, edit, bash | gpt-6-sol | Code changes |
 
 ## Usage
 
@@ -50,7 +50,7 @@ Create markdown files with YAML frontmatter in your extension's directory (e.g. 
 name: my-agent
 description: Does a specific thing
 tools: codex_search, video_extract
-model: gpt-5.4-mini
+model: gpt-6-luna
 ---
 
 You are an agent that does a specific thing...
@@ -60,7 +60,7 @@ Frontmatter fields:
 - **name** (required) — unique agent name, used in `{ agent: "my-agent" }` calls
 - **description** — short description
 - **tools** — comma-separated list of tools the agent needs (builtin or extension)
-- **model** — model identifier (defaults to `gpt-5.4`)
+- **model** — model identifier (defaults to `gpt-6-sol`)
 
 The markdown body becomes the agent's system prompt.
 
@@ -103,7 +103,7 @@ function registerMyAgents(): void {
         name: frontmatter.name,
         description: frontmatter.description || "",
         tools,
-        model: frontmatter.model || "gpt-5.4",
+        model: frontmatter.model || "gpt-6-sol",
         systemPrompt: body,
         filePath,
       });

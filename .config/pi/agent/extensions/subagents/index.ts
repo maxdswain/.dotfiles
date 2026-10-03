@@ -131,7 +131,7 @@ function loadAgents(): AgentConfig[] {
 			name: frontmatter.name,
 			description: frontmatter.description || "",
 			tools,
-			model: frontmatter.model || "gpt-5.4",
+			model: frontmatter.model || "gpt-6-sol",
 			systemPrompt: body,
 			filePath,
 		});
