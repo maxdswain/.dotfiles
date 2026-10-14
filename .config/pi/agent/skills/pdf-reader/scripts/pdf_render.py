@@ -1,56 +1,39 @@
 #!/usr/bin/env python3
-"""Render PDF pages to PNG images for visual inspection."""
+"""Render PDF pages to PNG using Poppler's pdfinfo and pdftoppm."""
 
-import sys
-import os
-import hashlib
 import argparse
-import pymupdf
+import hashlib
+import re
+import subprocess
+from pathlib import Path
 
-
-def parse_pages(spec: str, total: int) -> list[int]:
-    """Parse page spec like 'all', '1-5', '1,3,7', '3' into 0-indexed list."""
-    if spec.strip().lower() == "all":
-        return list(range(total))
-
-    pages = set()
-    for part in spec.split(","):
-        part = part.strip()
-        if "-" in part:
-            start, end = part.split("-", 1)
-            start = max(1, int(start))
-            end = min(total, int(end))
-            pages.update(range(start - 1, end))
-        else:
-            p = int(part) - 1
-            if 0 <= p < total:
-                pages.add(p)
-    return sorted(pages)
+from pdf_data import parse_pages
 
 
 def render(path: str, page_spec: str = "all", dpi: int = 150) -> list[str]:
-    doc = pymupdf.open(path)
-    pages = parse_pages(page_spec, len(doc))
+    source = Path(path).resolve()
+    info = subprocess.run(["pdfinfo", str(source)], check=True, capture_output=True, text=True)
+    match = re.search(r"^Pages:\s*(\d+)\s*$", info.stdout, re.MULTILINE)
+    if not match:
+        raise ValueError("Could not determine PDF page count from pdfinfo")
+    if dpi <= 0:
+        raise ValueError("DPI must be positive")
 
-    # Create output directory based on file hash for caching
-    file_hash = hashlib.md5(os.path.abspath(path).encode()).hexdigest()[:10]
-    out_dir = os.path.join("/tmp", f"pi-pdf-{file_hash}")
-    os.makedirs(out_dir, exist_ok=True)
+    file_hash = hashlib.md5(str(source).encode()).hexdigest()[:10]
+    out_dir = Path("/tmp") / f"pi-pdf-{file_hash}"
+    out_dir.mkdir(parents=True, exist_ok=True)
 
-    zoom = dpi / 72.0
-    mat = pymupdf.Matrix(zoom, zoom)
-
-    output_paths = []
-    for i in pages:
-        page = doc[i]
-        pix = page.get_pixmap(matrix=mat)
-        out_path = os.path.join(out_dir, f"page_{i + 1:04d}.png")
-        pix.save(out_path)
-        output_paths.append(out_path)
-        print(f"Page {i + 1} -> {out_path}")
-
-    doc.close()
-    return output_paths
+    paths = []
+    for i in parse_pages(page_spec, int(match.group(1))):
+        output = out_dir / f"page_{i + 1:04d}"
+        subprocess.run(
+            ["pdftoppm", "-f", str(i + 1), "-l", str(i + 1), "-singlefile", "-r", str(dpi), "-png", str(source), str(output)],
+            check=True,
+        )
+        path = str(output.with_suffix(".png"))
+        paths.append(path)
+        print(f"Page {i + 1} -> {path}")
+    return paths
 
 
 if __name__ == "__main__":
@@ -59,5 +42,4 @@ if __name__ == "__main__":
     parser.add_argument("--pages", default="all", help="Page range: 'all', '1-5', '1,3,7', '3'")
     parser.add_argument("--dpi", type=int, default=150, help="Render resolution (default: 150)")
     args = parser.parse_args()
-
     render(args.path, args.pages, args.dpi)

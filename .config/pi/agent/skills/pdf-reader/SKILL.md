@@ -9,17 +9,14 @@ Read and comprehend PDF files, especially math lecture notes and academic papers
 
 ## Setup
 
-All scripts use a venv at `SKILL_DIR/.venv` with `pymupdf` installed. If the venv is missing, create it from `requirements.txt`:
-
-```bash
-python3 -m venv SKILL_DIR/.venv
-SKILL_DIR/.venv/bin/pip install -r SKILL_DIR/requirements.txt
-```
+Requires `uvx`, Python 3.10+, and Java 11+ (`java -version`) for OpenDataLoader PDF. Page rendering additionally requires Poppler (`pdfinfo` and `pdftoppm`). No venv or requirements file is needed; `uvx` downloads and caches the Python package.
 
 **Python command:** Always invoke scripts with:
+```bash
+uvx --with opendataloader-pdf python SKILL_DIR/scripts/<script>.py [args]
 ```
-SKILL_DIR/.venv/bin/python SKILL_DIR/scripts/<script>.py [args]
-```
+
+OpenDataLoader PDF handles text extraction and document layout; Poppler is used only to render whole pages as images.
 
 ## Scripts
 
@@ -27,7 +24,7 @@ All scripts are in `SKILL_DIR/scripts/`.
 
 | Script | Purpose | Key args |
 |---|---|---|
-| `pdf_info.py <path>` | Metadata + per-page analysis (page count, TOC, text density, math density, image count) | — |
+| `pdf_info.py <path>` | Metadata + per-page analysis (page count, detected headings, text length, math density, image count) | — |
 | `pdf_extract.py <path> [--pages SPEC]` | Extract text by page | `--pages all\|1-5\|1,3,7\|3` |
 | `pdf_render.py <path> [--pages SPEC] [--dpi N]` | Render pages to PNG images in `/tmp/pi-pdf-*/` | `--pages`, `--dpi` (default 150) |
 | `pdf_search.py <path> <query> [--context N] [--literal]` | Search text content by regex or literal | `--context` lines (default 3), `--literal` flag |
@@ -40,7 +37,7 @@ Page specs: `all`, `1-5`, `1,3,7`, `3` (1-indexed, inclusive ranges).
 
 Run `pdf_info.py` on every new PDF before doing anything else. This tells you:
 - How many pages (determines strategy)
-- Whether there's a TOC (enables structural navigation)
+- Whether headings were detected (enables structural navigation; these are inferred from layout, not PDF bookmarks)
 - Per-page math density and image count (identifies which pages need vision)
 - Per-page text length (spots pages that are mostly diagrams/figures)
 
@@ -89,7 +86,7 @@ When reading rendered page images:
 - **Pages with low text_length but high image_count**: likely full-page diagrams or figures — always render these
 - **Pages with high math_density**: equations that text extraction will mangle — always render these
 - **Pages with decent text but zero math**: text extraction alone is fine, skip rendering
-- **TOC entries**: use these to navigate structurally rather than reading linearly
+- **Detected headings**: use these to navigate structurally rather than reading linearly
 
 ## Common Patterns
 
